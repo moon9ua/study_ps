@@ -13,7 +13,7 @@ def backtracking(i):
     global ans
 
     if i == n:
-        ans = min(ans, abs(calc_status(start)-calc_status(link)))
+        ans = min(ans, calc())
         return
 
     if len(start) < n//2:
@@ -26,12 +26,16 @@ def backtracking(i):
         backtracking(i+1)
         link.pop()
 
-def calc_status(team):
-    status = 0
-    for i,j in combinations(team, 2):
-        status += mat[i][j]
-        status += mat[j][i]
-    return status
+def calc():
+    tot_s = 0
+    tot_l = 0
+    for i,j in combinations(start, 2):
+        tot_s += mat[i][j]
+        tot_s += mat[j][i]
+    for i,j in combinations(link, 2):
+        tot_l += mat[i][j]
+        tot_l += mat[j][i]
+    return abs(tot_s - tot_l)
 
 backtracking(0)
 print(ans)
