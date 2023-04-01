@@ -14,11 +14,9 @@ for i in range(n):
         elif board[i][j] == 2:
             ch.append((i,j))
 
-mn = 1e9
+rets = []
 c = []
 def func(k):
-    global mn
-
     if len(c) == m:
         tot = 0
         for x1,y1 in home:
@@ -26,7 +24,7 @@ def func(k):
             for x2,y2 in c:
                 dist = min(dist, abs(x1-x2)+abs(y1-y2))
             tot += dist
-        mn = min(mn, tot)
+        rets.append(tot)
         return
 
     if k == len(ch):
@@ -38,4 +36,4 @@ def func(k):
     func(k+1)
 
 func(0)
-print(mn)
+print(min(rets))
