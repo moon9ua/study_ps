@@ -1,15 +1,11 @@
-from bisect import bisect_left
+from bisect import bisect_left, bisect_right
 import sys
 input = sys.stdin.readline
 
 n = int(input())
 x = list(map(int, input().split()))
 
-nx = sorted(x)
-arr = [nx[0]]
-for i in range(1, len(nx)):
-    if nx[i] != nx[i-1]:
-        arr.append(nx[i])
+tmp = sorted(list(set(x)))
 
 for xi in x:
-    print(bisect_left(arr, xi), end=' ')
+    print(bisect_left(tmp, xi), end=' ')
