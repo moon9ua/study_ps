@@ -5,6 +5,7 @@ input = sys.stdin.readline
 
 n = int(input())
 u = [int(input()) for _ in range(n)]
+u.sort()
 
 two = []
 for i in range(n):
@@ -12,12 +13,10 @@ for i in range(n):
         two.append(u[i] + u[j])
 two.sort()
 
-mx = 0
-for i in range(n):
+for i in range(n-1, -1, -1):
     for j in range(i):
         target = u[i] - u[j]
         cnt = bisect_right(two, target) - bisect_left(two, target)
         if cnt:
-            mx = max(mx, u[i])
-
-print(mx)
+            print(u[i])
+            exit()
