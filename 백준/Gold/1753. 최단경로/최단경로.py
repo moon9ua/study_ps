@@ -1,11 +1,10 @@
 import heapq
-from collections import defaultdict
 import sys
 input = sys.stdin.readline
 
 v,e = map(int,input().split())
 st = int(input())
-graph = defaultdict(list)
+graph = [[] for _ in range(v+1)]
 for _ in range(e):
     a,b,c = map(int,input().split())
     graph[a].append((b,c))
