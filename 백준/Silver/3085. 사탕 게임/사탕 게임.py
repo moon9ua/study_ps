@@ -9,21 +9,19 @@ board = [input().rstrip() for _ in range(n)]
 def search():
     ret = 0
     for i in range(n):
-        cntX, cntY = 0,0
         lenX, lenY = 1,1
         for j in range(1, n):
             if tmp[i][j-1] == tmp[i][j]:
                 lenX += 1
-                cntX = max(cntX, lenX)
+                ret = max(ret, lenX)
             else:
                 lenX = 1
 
             if tmp[j-1][i] == tmp[j][i]:
                 lenY += 1
-                cntY = max(cntY, lenY)
+                ret = max(ret, lenY)
             else:
                 lenY = 1
-        ret = max(ret, max(cntX, cntY))
     return ret
 
 cnt = 0
