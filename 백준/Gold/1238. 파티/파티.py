@@ -4,12 +4,13 @@ input = sys.stdin.readline
 
 n, m, X = map(int, input().split())
 graph = [[] for _ in range(n+1)]
+rev_graph = [[] for _ in range(n+1)]
 for _ in range(m):
     a, b, t = map(int, input().split())
     graph[a].append((b, t))
+    rev_graph[b].append((a, t))
 
-# a부터 모든 정점까지의 최단 거리
-def daik(a):
+def daik(a, g):
     pq = []
     dist = [1e9] * (n+1)
 
@@ -20,7 +21,7 @@ def daik(a):
         d, x = heapq.heappop(pq)
         if dist[x] < d:
             continue
-        for nx, nd in graph[x]:
+        for nx, nd in g[x]:
             totd = d + nd
             if totd < dist[nx]:
                 dist[nx] = totd
@@ -28,11 +29,12 @@ def daik(a):
 
     return dist
 
-from_x = daik(X)
+from_x = daik(X, graph)
+to_x = daik(X, rev_graph)
 
-ans = 0
+mx = 0
 for i in range(1, n+1):
-    tmp = from_x[i] + daik(i)[X]
-    ans = max(ans, tmp)
+    dist = from_x[i] + to_x[i]
+    mx = max(mx, dist)
 
-print(ans)
+print(mx)
