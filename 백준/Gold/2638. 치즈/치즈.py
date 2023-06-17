@@ -13,7 +13,6 @@ for _ in range(n):
     board.append(row)
     tot += row.count(1)
 
-
 q = deque()
 vis = [[False] * m for _ in range(n)]
 
@@ -45,7 +44,7 @@ while tot:
         if v >= 2:
             board[x][y] = 0
             tot -= 1
-            cheeze.pop((x, y))
+            del cheeze[(x, y)]
             q.append((x, y))
             vis[x][y] = True
 
