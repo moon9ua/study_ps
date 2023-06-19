@@ -5,18 +5,20 @@ sys.setrecursionlimit(111111)
 n = int(input())
 graph = [[] for _ in range(n+1)]
 for _ in range(n-1):
-    a,b = map(int,input().split())
+    a, b = map(int, input().split())
     graph[a].append(b)
     graph[b].append(a)
 
-p = [[] for _ in range(n+1)]
+p = [None] * (n+1)
 
-def dfs(x):
+def func(x):
     for nx in graph[x]:
-        if p[x] == nx:
+        if p[nx]:
             continue
         p[nx] = x
-        dfs(nx)
+        func(nx)
 
-dfs(1)
+p[1] = 0
+func(1)
+
 print(*p[2:], sep='\n')
