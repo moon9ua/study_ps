@@ -7,12 +7,14 @@ dx = [1, 0, -1, 0]
 dy = [0, 1, 0, -1]
 
 n, m = map(int, input().split())
-board = [list(map(int, input().split())) for _ in range(n)]
+board = []
 
 empty = []
 virus = []
 area = 0
 for i in range(n):
+    row = list(map(int, input().split()))
+    board.append(row)
     for j in range(m):
         if board[i][j] == 0:
             empty.append((i, j))
@@ -22,11 +24,12 @@ for i in range(n):
 area -= 3
 
 def bfs():
-    q = deque(virus)
+    q = deque()
     vis = [[False]*m for _ in range(n)]
     cnt = area
 
     for x, y in virus:
+        q.append((x, y))
         vis[x][y] = True
 
     while q:
@@ -61,6 +64,6 @@ def func(st, k):
             func(i, k+1)
             used[i] = False
             board[x][y] = 0
-        
+
 func(0, 0)
 print(mx)
