@@ -7,19 +7,19 @@ nums.sort()
 
 used = [False] * n
 lst = []
-ans = []
 def func(k):
     if k == m:
-        ans.append(' '.join(map(str, lst)))
+        print(*lst)
         return
 
+    prev = 0
     for i in range(n):
-        if not used[i]:
+        if not used[i] and prev != nums[i]:
             lst.append(nums[i])
             used[i] = True
+            prev = nums[i]
             func(k+1)
             lst.pop()
             used[i] = False
 
 func(0)
-print(*dict.fromkeys(ans), sep='\n')
