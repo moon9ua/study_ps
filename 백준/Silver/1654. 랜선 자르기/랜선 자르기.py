@@ -1,22 +1,34 @@
+### sys input ###
+
 import sys
+
 input = sys.stdin.readline
 
-k, n = map(int, input().split())
-line = [int(input()) for _ in range(k)]
+### solve ###
 
-def ok(x):
+K, N = map(int, input().split())
+lines = [int(input()) for _ in range(K)]
+
+l = 1
+r = max(lines)
+
+
+def ok(mid):
     cnt = 0
-    for l in line:
-        cnt += l // x
-    return cnt >= n
+    for line in lines:
+        cnt += line // mid
+    return cnt >= N
 
-l, r = 1, max(line)+1
 
-while l+1 < r:
-    mid = (l+r) // 2
+ans = 0
+
+while l <= r:
+    mid = (l + r) // 2
+
     if ok(mid):
-        l = mid
+        ans = mid
+        l = mid + 1
     else:
-        r = mid
+        r = mid - 1
 
-print(l)
+print(ans)
