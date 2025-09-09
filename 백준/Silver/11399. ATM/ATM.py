@@ -1,15 +1,18 @@
+### sys input ###
+
 import sys
+
 input = sys.stdin.readline
 
-n = int(input())
-p = list(map(int, input().split()))
+### solve ###
 
-sorted_p = sorted(p)
+N = int(input())
+P = map(int, input().split())
 
-acc = 0
-ans = 0
-for time in sorted_p:
-    acc += time
-    ans += acc
+lst = [0] + sorted(P)
+prefix = [0] * (N + 1)
 
-print(ans)
+for i in range(1, N + 1):
+    prefix[i] = prefix[i - 1] + lst[i]
+
+print(sum(prefix))
