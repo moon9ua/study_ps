@@ -12,10 +12,10 @@ for _ in range(m):
     graph[v].append(u)
 
 def dfs(x):
+    vis[x] = True
     for nx in graph[x]:
         if vis[nx]:
             continue
-        vis[nx] = True
         dfs(nx)
 
 cnt = 0
