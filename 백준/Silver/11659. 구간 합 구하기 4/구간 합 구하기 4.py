@@ -1,13 +1,18 @@
+### sys input ###
+
 import sys
+
 input = sys.stdin.readline
 
-n, m = map(int, input().split())
-nums = list(map(int, input().split()))
+### solve ###
 
-ps = [0] * (n+1)
-for i in range(1, n+1):
-    ps[i] = ps[i-1] + nums[i-1]
+N, M = map(int, input().split())
+n_lst = [0] + list(map(int, input().split()))
 
-for _ in range(m):
+prefix = [0] * (N + 1)
+for i in range(1, N + 1):
+    prefix[i] = prefix[i - 1] + n_lst[i]
+
+for _ in range(M):
     i, j = map(int, input().split())
-    print(ps[j] - ps[i-1])
+    print(prefix[j] - prefix[i - 1])
